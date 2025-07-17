@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import TextInput from '../input/text';
+import { addEvent } from '../../utils/datatest';
 import DatePickerInput from '../input/datepicker';
+import ImageInput from '../input/imagepicker';
 
 import { 
   Container, 
@@ -19,57 +21,113 @@ export default function FormEvent() {
     const [remainingSpots, setRemainingSpots] = useState('');
     const [location, setLocation] = useState('');
     const [organizer, setOrganizer] = useState('');
+    
+    // Estados para a imagem
+    const [imagePreview, setImagePreview] = useState(null);
+    const [imageFile, setImageFile] = useState(null);
+
     const navigate = useNavigate();
 
-    function verifyFields(User) {
-        if(name === '' || date === '' || description === '' || limit === '' || remainingSpots === '' || location === '' || organizer === ''){
+    function verifyFields(event) {
+        if(name === '' || date === '' || description === '' || limit === '' || location === '' || organizer === ''){
             alert("I'm empty, fill me please ...");
-        } else{
-            addEvent(event);
+        } else {
+            adjustFields(event);
+            addEvent(event); // Se quiser enviar a imagem, precisa adaptar essa função
             alert(`Event ${name} created!`);
             navigate('/home');
         }
     }
 
-    function Submit() {
+    function adjustFields(event) {
+        setDate(String(event.date));
+        setLimit(parseInt(event.limit));
+    }
+    
+    function handleSubmit() {
         const newEvent = {
-        name,
-        date,
-        description,
-        limit,
-        remainingSpots,
-        location,
-        organizer
+            name,
+            date,
+            description,
+            limit,
+            remainingSpots,
+            location,
+            organizer,
+            imageFile
         };
 
         verifyFields(newEvent);
     }
 
-return (
-    <Container>
-        <Title>Introduce, baby ❤💋</Title>
+    // Função para pegar e mostrar preview da imagem
+    function handleChange(e) {
+        const file = e.target.files[0];
+        if(file) {
+            setImageFile(file);
+            setImagePreview(URL.createObjectURL(file));
+        }
+    }
 
-        <Label>Name</Label>
-        <TextInput
-            id="name" 
-            name="name" 
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-        />
+    return (
+        <Container>
+            <Title>Introduce, baby ❤💋</Title>
 
-        <Label>Date</Label>
-        <DatePickerInput 
-            id="date" 
-            name="date" 
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-        />
-    
-        <Label>Password</Label>
+            <Label>Name</Label>
+            <TextInput
+                id="name" 
+                name="name" 
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+            />
+
+            <Label>Date</Label>
+            <DatePickerInput 
+                id="date" 
+                name="date" 
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+            />
         
-        <SendBox>
-            <Submit value="Sign Up" onClick={Submit} />
-        </SendBox>
-    </Container>
-  );
+            <Label>Description</Label>
+            <TextInput
+                id="description" 
+                name="description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+            />
+            
+            <Label>Limit</Label>
+            <TextInput
+                id="limit" 
+                name="limit" 
+                value={limit}
+                onChange={(e) => setLimit(e.target.value)}
+            />
+            
+            <Label>Location</Label>
+            <TextInput
+                id="location" 
+                name="location" 
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+            />
+            
+            <Label>Organizer</Label>
+            <TextInput
+                id="organizer" 
+                name="organizer" 
+                value={organizer}
+                onChange={(e) => setOrganizer(e.target.value)}
+            />
+            
+            <div>
+                <ImageInput id="image" name="image" onChange={handleChange} />
+                {imagePreview && <img src={imagePreview} alt="Preview" style={{ width: '200px', marginTop: 10 }} />}
+            </div>
+
+            <SendBox>
+                <Submit value="Sign Up" onClick={handleSubmit} />
+            </SendBox>
+        </Container>
+    );
 }

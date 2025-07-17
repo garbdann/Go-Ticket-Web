@@ -49,6 +49,7 @@ return (
             value={password}
             onChange={(e) => setPassword(e.target.value)}
         />
+        <Submit value="Forgot Your Password?" onClick={() => navigate('/resetPassword')} />
         
         <SendBox>
             <Submit value="Authenticate" onClick={() => Authenticate(email, password)} />

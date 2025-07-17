@@ -20,7 +20,7 @@ export default function NavigationBar() {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item onClick={() => navigate('/cadastro-evento')}>
+              <Dropdown.Item onClick={() => navigate('/registerEvent')}>
                 Cadastrar evento
               </Dropdown.Item>
               <Dropdown.Item onClick={() => navigate('/meus-eventos')}>
