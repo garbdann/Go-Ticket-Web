@@ -1,21 +1,60 @@
-import React from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { StyledNavbar, StyledNav } from './style';
 import { Dropdown } from 'react-bootstrap';
+import { StyledNavbar, StyledNav } from './style';
 
 export default function NavigationBar() {
   const navigate = useNavigate();
+  const [showNavbar, setShowNavbar] = useState(false); // toggle state
 
   return (
-    <StyledNavbar expand="lg" sticky="top">
-      <StyledNavbar.Brand style={{ color: 'black', fontSize: '30px' }}>
-        GoTicket!
-      </StyledNavbar.Brand>
-      <StyledNavbar.Toggle aria-controls="basic-navbar-nav" />
-      <StyledNavbar.Collapse id="basic-navbar-nav">
-        <StyledNav>
+    <div style={{ display: 'flex' }}>
+      {/* Botão para abrir/fechar a navbar */}
+      <button
+        onClick={() => setShowNavbar(!showNavbar)}
+        style={{
+          position: 'fixed',
+          top: '10px',
+          left: '10px',
+          zIndex: 1000,
+          padding: '10px',
+        }}
+      >
+        ☰
+      </button>
+
+      {/* Navbar lateral */}
+      {showNavbar && (
+        <div
+          style={{
+            width: '250px',
+            height: '100vh',
+            backgroundColor: '#f8f9fa',
+            borderRight: '1px solid #ccc',
+            paddingTop: '60px',
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            zIndex: 999,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            paddingLeft: '20px',
+            gap: '20px'
+          }}
+        >
+          <h2 style={{ color: 'black' }}>GoTicket!</h2>
+
           <Dropdown>
-            <Dropdown.Toggle style={{ background: 'none', border: 'none', color: 'black', fontSize: '30px' }}>
+            <Dropdown.Toggle
+              style={{
+                background: 'none',
+                border: 'none',
+                color: 'black',
+                fontSize: '20px',
+                padding: 0,
+              }}
+            >
               Eventos
             </Dropdown.Toggle>
 
@@ -29,11 +68,20 @@ export default function NavigationBar() {
             </Dropdown.Menu>
           </Dropdown>
 
-          <StyledNav.Link onClick={() => navigate('/')} style={{ color: 'black', fontSize: '30px' }}>
+          <button
+            onClick={() => navigate('/')}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: 'black',
+              fontSize: '20px',
+              padding: 0,
+            }}
+          >
             Sair
-          </StyledNav.Link>
-        </StyledNav>
-      </StyledNavbar.Collapse>
-    </StyledNavbar>
+          </button>
+        </div>
+      )}
+    </div>
   );
 }

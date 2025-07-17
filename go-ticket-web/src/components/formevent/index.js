@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import TextInput from '../input/text';
 import { addEvent } from '../../utils/datatest';
-import DatePickerInput from '../input/datepicker';
-import ImageInput from '../input/imagepicker';
 
-import { 
-  Container, 
-  Title,  
-  Label,
-  SendBox,
-  Submit,
-} from "./style";
+import ContentBox from '../ui/contentbox';
+import Label from '../ui/label';
+import Title from '../ui/title';
+
+import SubmitButton from '../ui/submitbutton';
+import TextInput from '../ui/text';
+import DatePickerInput from '../ui/datepicker';
+import ImageInput from '../ui/imagepicker';
 
 export default function FormEvent() {
     const [name, setName] = useState('');
@@ -22,7 +20,6 @@ export default function FormEvent() {
     const [location, setLocation] = useState('');
     const [organizer, setOrganizer] = useState('');
     
-    // Estados para a imagem
     const [imagePreview, setImagePreview] = useState(null);
     const [imageFile, setImageFile] = useState(null);
 
@@ -30,7 +27,7 @@ export default function FormEvent() {
 
     function verifyFields(event) {
         if(name === '' || date === '' || description === '' || limit === '' || location === '' || organizer === ''){
-            alert("I'm empty, fill me please ...");
+            alert("Please fill in all fields.");
         } else {
             adjustFields(event);
             addEvent(event); // Se quiser enviar a imagem, precisa adaptar essa função
@@ -69,7 +66,7 @@ export default function FormEvent() {
     }
 
     return (
-        <Container>
+        <ContentBox>
             <Title>Introduce, baby ❤💋</Title>
 
             <Label>Name</Label>
@@ -125,9 +122,9 @@ export default function FormEvent() {
                 {imagePreview && <img src={imagePreview} alt="Preview" style={{ width: '200px', marginTop: 10 }} />}
             </div>
 
-            <SendBox>
-                <Submit value="Sign Up" onClick={handleSubmit} />
-            </SendBox>
-        </Container>
+                <SubmitButton value="Sign Up" onClick={handleSubmit} />
+        </ContentBox>
     );
+
+    // Ajustar para colocar o ContentBox ao invés de SendBox
 }

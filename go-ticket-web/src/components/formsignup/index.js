@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { addUser } from '../../utils/datatest';
-import TextInput from '../input/text';
-import PasswordInput from '../input/password';
 
-import {
-  Container, 
-  Title,  
-  Label,
-  SendBox,
-  Submit,
-} from "./style";
+import { CustomContentBox } from './style';
+import ContentBox from '../ui/contentbox';
+import Label from '../ui/label';
+import Title from '../ui/title';
+
+import TextInput from '../ui/text';
+import PasswordInput from '../ui/password';
+import SubmitButton from '../ui/submitbutton';
 
 export default function FormSignUp() {
     const [username, setUsername] = useState('');
@@ -20,7 +19,7 @@ export default function FormSignUp() {
 
     function verifyFields(User) {
         if(username === '' || email === '' || password === ''){
-            alert("I'm empty, fill me please ...");
+            alert("Please fill in all fields.");
         } else{
             addUser(User);
             alert(`User ${username} created!`);
@@ -39,8 +38,8 @@ export default function FormSignUp() {
     }
 
 return (
-    <Container>
-        <Title>Introduce, baby ❤💋</Title>
+    <CustomContentBox>
+        <Title>Join us</Title>
 
         <Label>Username</Label>
         <TextInput
@@ -66,9 +65,9 @@ return (
             onChange={(e) => setPassword(e.target.value)}
         />
         
-        <SendBox>
-            <Submit value="Sign Up" onClick={signUp} />
-        </SendBox>
-    </Container>
+        <ContentBox style={{display: 'flex', justifyContent: 'center'}}>
+            <SubmitButton value="Sign Up" onClick={signUp} />
+        </ContentBox>
+    </CustomContentBox>
   );
 }

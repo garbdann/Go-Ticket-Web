@@ -1,4 +1,3 @@
-import React from 'react';
 import { Container } from './style';
 import NavigationBar from '../../components/navigationbar';
 

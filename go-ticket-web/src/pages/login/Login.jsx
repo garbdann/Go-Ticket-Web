@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { Container } from './style';
+import Container from '../../components/visuals/container';
 import FormLogin from '../../components/formlogin';
 
 export default function Login() {

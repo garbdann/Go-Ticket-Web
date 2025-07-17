@@ -22,3 +22,4 @@ COISAS A FAZER
 - Adicionar cards e, com map, conseguir listar todos os eventos
 - Adicionar imagens aos eventos
 - Adicinar uma tela de "esqueci minha senha"
+- Conferir a relação de métodos de segurança entre datatable e os componentes

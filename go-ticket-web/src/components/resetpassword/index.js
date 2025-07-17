@@ -1,37 +1,36 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import TextInput from '../../components/input/text'; 
 
+import ContentBox from '../ui/contentbox';
+import Title from '../ui/title';
+import SubTitle from '../ui/subtitle';
+
+import TextInput from '../ui/text'; 
+import SubmitButton from '../ui/submitbutton';
 
 import {
-    FormBox,
-    Title,
-    Info,
-    Container,
-    Submit,
-
+    SendBox
 } from "./style"
 
-export default function ResetPassword() {
+export default function FormResetPassword() {
 
     const [email, setEmail] = useState('')
     const navigate = useNavigate();
 
     return (
-        <>
-            <Container>
-                <Title>Recuperação de Senha</Title>
-                <Info>Informe seu e-mail de autenticação e enviaremos um link para que possa recuperar sua senha!</Info>
-                <Container>
-                    <TextInput
-                        id="email" 
-                        name="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)} 
-                    />
-                    <Submit value="Enviar" onClick={() => navigate('/')}/>
-                </Container>
-            </Container>
-        </>
+        <ContentBox>
+            <Title>Recuperação de Senha</Title>
+            <SubTitle>Informe seu e-mail</SubTitle>
+            <TextInput
+                id="email" 
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)} 
+            />
+            <SendBox>
+                <SubmitButton value="Enviar" onClick={() => navigate('/')}/>
+            </SendBox>
+        </ContentBox>
     )
+
 }

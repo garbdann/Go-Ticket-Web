@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledTextInput = styled.input.attrs({ type: 'text' })` 
-    width: 90%;
-    height: 30px;
+export const StyledPasswordInput = styled.input.attrs({ type: 'password' })` 
     border: none;
     border-bottom: 1px solid #888;
     border-radius: 3px;

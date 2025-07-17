@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { authenticateUser } from '../../utils/datatest';
-import TextInput from '../input/text';
-import PasswordInput from '../input/password';
 
-import { 
-    Container, 
-    Title, 
-    SubTitle,
-    Label,
+import ContentBox from '../ui/contentbox';
+import Label from '../ui/label';
+import Title from '../ui/title';
+import SubTitle from '../ui/subtitle';
+
+import SubmitButton from '../ui/submitbutton';
+import TextInput from '../ui/text';
+import PasswordInput from '../ui/password';
+
+import {
+    CustomContentBox,
     SendBox,
-    Submit,
-    LinkSignUp,
+    Link,
 } from "./style";
 
 export default function FormLogin() {
@@ -22,17 +25,22 @@ export default function FormLogin() {
     function Authenticate(email, password) {
         const user = authenticateUser(email, password);
 
-        if (user) {
-            navigate('/home', { state: { user } });
+        verifyFields(user);
+    }
+
+    function verifyFields(user) {
+        if(email === '' || password === ''){
+            alert("Please fill in all fields.");
         } else {
-            alert('Invalid email or password.');
+            alert(`Logged with success!`);
+            navigate('/home');
         }
-  }
+    }
 
 return (
-    <Container>
-        <Title>Welcome to GoTicket, honey!</Title>
-        <SubTitle>Tell me your secrets...</SubTitle>
+    <CustomContentBox>
+        <Title>Welcome to GoTicket</Title>
+        <SubTitle>Sign in</SubTitle>
 
         <Label>E-mail</Label>
         <TextInput
@@ -41,20 +49,22 @@ return (
             value={email}
             onChange={(e) => setEmail(e.target.value)}
         />
-    
-        <Label>Password</Label>
+
+        <ContentBox style={{display: 'flex', justifyContent: 'row', justifyContent: 'space-between'}}>
+            <Label>Password</Label>
+            <Link onClick={() => navigate('/resetPassword')} style={{marginTop: '10px'}}> Forgot Your Password? </Link>
+        </ContentBox>
         <PasswordInput
             id="password" 
             name="password" 
             value={password}
             onChange={(e) => setPassword(e.target.value)}
         />
-        <Submit value="Forgot Your Password?" onClick={() => navigate('/resetPassword')} />
         
         <SendBox>
-            <Submit value="Authenticate" onClick={() => Authenticate(email, password)} />
-            <LinkSignUp onClick={() => navigate('/signUp')}> Sign Up </LinkSignUp>
+            <SubmitButton value="Authenticate" onClick={() => Authenticate(email, password)} />
+            <Link onClick={() => navigate('/signUp')}> Sign Up </Link>
         </SendBox>
-    </Container>
+    </CustomContentBox>
   );
 }
