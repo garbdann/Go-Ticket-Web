@@ -21,4 +21,9 @@ COISAS A FAZER
 - Adicionar cards e, com map, conseguir listar todos os eventos
 - Adicionar imagens aos eventos
 - Conferir a relação de métodos de segurança entre datatable e os componentes
-- Revisar a lógica de login
+
+EXPLICAÇÃO DA LÓGICA DE BOXES
+Container -> São as divs padrão de tela, equivalem ao tamanho inteiro da tela
+ContentBox -> São divs de conteúdo genérica, no qual os componentes podem estilizar com estilos simples (Inline) ou mais extensos (Styled-component)
+CustomContentBox -> São os estilos mais extensos (Styled-component) das ContentBox
+FormBox -> São os ContentBox estilizados para um componente de formulário

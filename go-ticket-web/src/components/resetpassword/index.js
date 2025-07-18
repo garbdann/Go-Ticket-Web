@@ -8,17 +8,13 @@ import SubTitle from '../ui/subtitle';
 import TextInput from '../ui/text'; 
 import SubmitButton from '../ui/submitbutton';
 
-import {
-    SendBox
-} from "./style"
-
 export default function FormResetPassword() {
 
     const [email, setEmail] = useState('')
     const navigate = useNavigate();
 
     return (
-        <ContentBox>
+        <ContentBox style={{paddingTop: '150px'}}>
             <Title>Recuperação de Senha</Title>
             <SubTitle>Informe seu e-mail</SubTitle>
             <TextInput
@@ -27,9 +23,9 @@ export default function FormResetPassword() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)} 
             />
-            <SendBox>
+            <ContentBox style={{textAlign: 'center'}}>
                 <SubmitButton value="Enviar" onClick={() => navigate('/')}/>
-            </SendBox>
+            </ContentBox>
         </ContentBox>
     )
 

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { addUser } from '../../utils/datatest';
 
-import { CustomContentBox } from './style';
+import FormBox from '../ui/formbox';
 import ContentBox from '../ui/contentbox';
 import Label from '../ui/label';
 import Title from '../ui/title';
@@ -38,7 +38,7 @@ export default function FormSignUp() {
     }
 
 return (
-    <CustomContentBox>
+    <FormBox>
         <Title>Join us</Title>
 
         <Label>Username</Label>
@@ -68,6 +68,6 @@ return (
         <ContentBox style={{display: 'flex', justifyContent: 'center'}}>
             <SubmitButton value="Sign Up" onClick={signUp} />
         </ContentBox>
-    </CustomContentBox>
+    </FormBox>
   );
 }

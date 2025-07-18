@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { addEvent } from '../../utils/datatest';
 
 import ContentBox from '../ui/contentbox';
+import FormBox from '../ui/formbox';
 import Label from '../ui/label';
 import Title from '../ui/title';
 
@@ -66,7 +67,7 @@ export default function FormEvent() {
     }
 
     return (
-        <ContentBox>
+        <FormBox style={{paddingTop: '100px'}}>
             <Title>Introduce, baby ❤💋</Title>
 
             <Label>Name</Label>
@@ -117,13 +118,15 @@ export default function FormEvent() {
                 onChange={(e) => setOrganizer(e.target.value)}
             />
             
-            <div>
+            <ContentBox style={{textAlign: 'center', paddingTop: '20px'}}>
                 <ImageInput id="image" name="image" onChange={handleChange} />
                 {imagePreview && <img src={imagePreview} alt="Preview" style={{ width: '200px', marginTop: 10 }} />}
-            </div>
+            </ContentBox>
 
+            <ContentBox style={{textAlign: 'center'}}>
                 <SubmitButton value="Sign Up" onClick={handleSubmit} />
-        </ContentBox>
+            </ContentBox>
+        </FormBox>
     );
 
     // Ajustar para colocar o ContentBox ao invés de SendBox
