@@ -1,4 +1,4 @@
-import Container from '../../components/visuals/container';
+import Container from '../../components/ui/container';
 import FormEvent from '../../components/formevent';
 
 export default function RegisterEvent() {

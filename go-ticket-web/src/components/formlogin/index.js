@@ -23,17 +23,25 @@ export default function FormLogin() {
     const navigate = useNavigate();
 
     function Authenticate(email, password) {
+        if(verifyFields(email, password)) {
+            
+        }
+        
         const user = authenticateUser(email, password);
 
-        verifyFields(user);
+        if(user) {
+            alert("Logged in successfully!");
+            navigate('/home');
+        } else {
+            alert("Invalid email or password.");
+        }
     }
 
-    function verifyFields(user) {
-        if(email === '' || password === ''){
+    function verifyFields(email, password) {
+        if (email.trim() === '' || password.trim() === '') {
             alert("Please fill in all fields.");
         } else {
-            alert(`Logged with success!`);
-            navigate('/home');
+            return;
         }
     }
 

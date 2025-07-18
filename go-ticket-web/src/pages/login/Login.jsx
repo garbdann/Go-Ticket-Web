@@ -1,4 +1,4 @@
-import Container from '../../components/visuals/container';
+import Container from '../../components/ui/container';
 import FormLogin from '../../components/formlogin';
 
 export default function Login() {
