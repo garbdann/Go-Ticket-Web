@@ -1,87 +1,62 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { Dropdown } from 'react-bootstrap';
-import { StyledNavbar, StyledNav } from './style';
+import { Nav, Dropdown } from 'react-bootstrap';
+import { StyledSidebar, StyledToggleButton } from './style';
 
 export default function NavigationBar() {
   const navigate = useNavigate();
-  const [showNavbar, setShowNavbar] = useState(false); // toggle state
+  const [showSidebar, setShowSidebar] = useState(false);
 
   return (
-    <div style={{ display: 'flex' }}>
-      {/* Botão para abrir/fechar a navbar */}
-      <button
-        onClick={() => setShowNavbar(!showNavbar)}
-        style={{
-          position: 'fixed',
-          top: '10px',
-          left: '10px',
-          zIndex: 1000,
-          padding: '10px',
-        }}
+    <div style={{ minHeight: '200vh', paddingLeft: '20px' }}>
+      <StyledToggleButton
+        onClick={() => setShowSidebar(!showSidebar)}
+        sidebarVisible={showSidebar}
+        aria-label={showSidebar ? 'Close sidebar' : 'Open sidebar'}
       >
         ☰
-      </button>
+      </StyledToggleButton>
 
-      {/* Navbar lateral */}
-      {showNavbar && (
-        <div
-          style={{
-            width: '250px',
-            height: '100vh',
-            backgroundColor: '#f8f9fa',
-            borderRight: '1px solid #ccc',
-            paddingTop: '60px',
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            zIndex: 999,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-            paddingLeft: '20px',
-            gap: '20px'
-          }}
-        >
-          <h2 style={{ color: 'black' }}>GoTicket!</h2>
+      {showSidebar ? (
+        <StyledSidebar expand="lg" className="flex-column align-items-start">
+          <StyledSidebar.Brand className="mb-4 ps-3" style={{ fontSize: '26px' }}>
+            GoTicket!
+          </StyledSidebar.Brand>
 
-          <Dropdown>
-            <Dropdown.Toggle
-              style={{
-                background: 'none',
-                border: 'none',
-                color: 'black',
-                fontSize: '20px',
-                padding: 0,
-              }}
+          <Nav className="flex-column w-100 px-3">
+            <Dropdown>
+              <Dropdown.Toggle
+                variant="link"
+                className="nav-link text-start"
+                style={{
+                  fontSize: '18px',
+                  textDecoration: 'none',
+                  color: 'white',
+                }}
+              >
+                Eventos
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item onClick={() => navigate('/registerEvent')}>
+                  Cadastrar evento
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => navigate('/meus-eventos')}>
+                  Meus eventos
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+
+            <Nav.Link
+              onClick={() => navigate('/')}
+              className="mt-3"
+              style={{ fontSize: '18px', color: 'white' }}
             >
-              Eventos
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu>
-              <Dropdown.Item onClick={() => navigate('/registerEvent')}>
-                Cadastrar evento
-              </Dropdown.Item>
-              <Dropdown.Item onClick={() => navigate('/meus-eventos')}>
-                Meus eventos
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-
-          <button
-            onClick={() => navigate('/')}
-            style={{
-              background: 'none',
-              border: 'none',
-              color: 'black',
-              fontSize: '20px',
-              padding: 0,
-            }}
-          >
-            Sair
-          </button>
-        </div>
-      )}
+              Sair
+            </Nav.Link>
+          </Nav>
+        </StyledSidebar>
+      ) : null}
     </div>
   );
 }

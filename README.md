@@ -17,9 +17,8 @@ TELAS:
 - Home (Onde ficarão o componente de carrosel de eventos próximos, eventos que acontecerão em breve, etc. 
 
 COISAS A FAZER
-- Adicionar um componente pai que seja para inputs
 - Adicionar o cadastro de eventos
 - Adicionar cards e, com map, conseguir listar todos os eventos
 - Adicionar imagens aos eventos
-- Adicinar uma tela de "esqueci minha senha"
 - Conferir a relação de métodos de segurança entre datatable e os componentes
+- Revisar a lógica de login
