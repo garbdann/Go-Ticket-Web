@@ -1,8 +1,8 @@
-
+import { StyledDatePicker } from "./style";
 
 export default function DatePickerInput({ id, name, value, onChange }) {
   return (
-    <input
+    <StyledDatePicker
       type="date"
       id={id}
       name={name}

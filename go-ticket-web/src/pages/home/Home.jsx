@@ -1,18 +1,19 @@
-import { Container } from './style';
-import NavigationBar from '../../components/navigationbar';
+import { GridContentBox } from './style';
 
+import NavigationBar from '../../components/navigationbar';
+import ContentBox from '../../components/ui/contentbox';
 
 export default function Home() {
 
     return (
-        <Container>
-            <div style={{ gridArea: 'topo' }}>
+        <GridContentBox>
+            <ContentBox style={{ gridArea: 'topo' }}>
                 <NavigationBar />
-            </div>
-            <div style={{ gridArea: 'conteudo' }}>
+            </ContentBox>
+            <ContentBox style={{ gridArea: 'conteudo' }}>
                 
-            </div>
-        </Container>
+            </ContentBox>
+        </GridContentBox>
     )
 
 }

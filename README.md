@@ -8,22 +8,23 @@ As linguagens e frameworks incluem HTML, CSS, JavaScript, React e React Bootstra
 TELAS:
 - Login de usuário
 - Cadastro de usuário
-- Meu perfil
-- Meus eventos (Sessão onde poderá visualizar os meus eventos e criar novos eventos)
-- Meus convites (Onde ficarão salvos os convites de eventos)
 - Criar evento
 - Pesquisa de eventos (Com um filtro de eventos)
 - Visualização de evento (Tela da visualização de um evento específico)
-- Home (Onde ficarão o componente de carrosel de eventos próximos, eventos que acontecerão em breve, etc. 
+- Home (Onde ficarão o componente de carrosel de eventos próximos, eventos que acontecerão em breve, etc.)
+
+ADIÇÕES FUTURAS (Com banco de dados):
+- Meus eventos
+- Meus convites
 
 COISAS A FAZER
-- Adicionar o cadastro de eventos
 - Adicionar cards e, com map, conseguir listar todos os eventos
-- Adicionar imagens aos eventos
-- Conferir a relação de métodos de segurança entre datatable e os componentes
 
 EXPLICAÇÃO DA LÓGICA DE BOXES
 Container -> São as divs padrão de tela, equivalem ao tamanho inteiro da tela
 ContentBox -> São divs de conteúdo genérica, no qual os componentes podem estilizar com estilos simples (Inline) ou mais extensos (Styled-component)
 CustomContentBox -> São os estilos mais extensos (Styled-component) das ContentBox
 FormBox -> São os ContentBox estilizados para um componente de formulário
+
+EXPLICAÇÃO DA LÓGICA DE HOOKS
+Eu encontrei uma forma de criar hooks, dado que eu estava repetindo demais as funções da DialogBox. Então, eu pesquisei e achei uma forma de conseguir criar um hook para que eu pudesse importar somente ele e usar em todos os componentes, visto que todos usam DialogBox.

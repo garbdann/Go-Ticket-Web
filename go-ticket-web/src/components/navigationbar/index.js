@@ -2,13 +2,22 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Nav, Dropdown } from 'react-bootstrap';
 import { StyledSidebar, StyledToggleButton } from './style';
+import { useUser } from '../../context/UserContext';
+
+import ContentBox from '../ui/contentbox';
 
 export default function NavigationBar() {
   const navigate = useNavigate();
   const [showSidebar, setShowSidebar] = useState(false);
+  const { user, logout } = useUser();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
 
   return (
-    <div style={{ minHeight: '200vh', paddingLeft: '20px' }}>
+    <ContentBox style={{ minHeight: '200vh', paddingLeft: '20px' }}>
       <StyledToggleButton
         onClick={() => setShowSidebar(!showSidebar)}
         sidebarVisible={showSidebar}
@@ -24,6 +33,11 @@ export default function NavigationBar() {
           </StyledSidebar.Brand>
 
           <Nav className="flex-column w-100 px-3">
+            {user && (
+              <Nav.Link className="mb-3 ps-3" style={{ fontSize: '18px', color: 'white' }}>
+                Olá, {user.username}!
+              </Nav.Link>
+            )}
             <Dropdown>
               <Dropdown.Toggle
                 variant="link"
@@ -48,7 +62,7 @@ export default function NavigationBar() {
             </Dropdown>
 
             <Nav.Link
-              onClick={() => navigate('/')}
+              onClick={handleLogout}
               className="mt-3"
               style={{ fontSize: '18px', color: 'white' }}
             >
@@ -57,6 +71,6 @@ export default function NavigationBar() {
           </Nav>
         </StyledSidebar>
       ) : null}
-    </div>
+    </ContentBox>
   );
 }

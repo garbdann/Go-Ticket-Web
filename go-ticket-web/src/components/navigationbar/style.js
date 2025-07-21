@@ -1,7 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import { Navbar } from 'react-bootstrap';
 
-// Animação para a sidebar deslizar da esquerda
 const slideIn = keyframes`
   from {
     transform: translateX(-260px);

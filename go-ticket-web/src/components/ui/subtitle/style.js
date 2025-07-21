@@ -5,4 +5,5 @@ export const StyledSubTitle = styled.h3`
     color: #888;
     font-weight: 100;
     margin-bottom: 40px;
+    margin-top: 40px;
 `;

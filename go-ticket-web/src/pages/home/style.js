@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import ContentBox from '../../components/ui/contentbox';
 
-export const Container = styled.div`
+export const GridContentBox = styled(ContentBox)`
     display: grid;
     width: 100%;    
     min-height: 100vh;
