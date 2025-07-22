@@ -105,6 +105,7 @@ export default function HomeDashboard() {
                                 { value: 'Palestra', label: 'Palestra' },
                                 { value: 'Workshop', label: 'Workshop' },
                                 { value: 'Evento', label: 'Evento Geral' },
+                                { value: 'Outros', label: 'Outros' }
                             ]}
                             className="form-select"
                         />
@@ -126,6 +127,7 @@ export default function HomeDashboard() {
                                 { value: 'Palestra', label: 'Palestra' },
                                 { value: 'Workshop', label: 'Workshop' },
                                 { value: 'Evento', label: 'Evento Geral' },
+                                { value: 'Outros', label: 'Outros' }
                             ]}
                             className="form-select"
                         />

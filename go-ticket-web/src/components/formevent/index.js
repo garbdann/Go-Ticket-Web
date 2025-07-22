@@ -80,7 +80,7 @@ export default function FormEvent() {
     reader.onload = function (e) {
       const img = new Image();
       img.onload = function () {
-        if (img.width === 800 && img.height === 600) {
+        if (img.width <= 800 && img.height <= 600) {
           setImageFile(file);
           setImageDataUrl(e.target.result);
         } else {
@@ -184,6 +184,7 @@ export default function FormEvent() {
               { value: 'Palestra', label: 'Palestra' },
               { value: 'Workshop', label: 'Workshop' },
               { value: 'Evento', label: 'Evento Geral' },
+              { value: 'Outros', label: 'Outros' }
             ]}
             className="form-select"
           />
@@ -236,6 +237,7 @@ export default function FormEvent() {
               { value: 'Palestra', label: 'Palestra' },
               { value: 'Workshop', label: 'Workshop' },
               { value: 'Evento', label: 'Evento Geral' },
+              { value: 'Outros', label: 'Outros' }
             ]}
             className="form-select"
           />
