@@ -1,6 +1,6 @@
 import { StyledDatePicker } from "./style";
 
-export default function DatePickerInput({ id, name, value, onChange }) {
+export default function DateInput({ id, name, value, onChange }) {
   return (
     <StyledDatePicker
       type="date"

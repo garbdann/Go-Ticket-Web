@@ -4,7 +4,6 @@ import { Nav, Dropdown } from 'react-bootstrap';
 import { StyledSidebar, StyledToggleButton } from './style';
 import { useUser } from '../../context/UserContext';
 
-import ContentBox from '../ui/contentbox';
 
 export default function NavigationBar() {
   const navigate = useNavigate();
@@ -17,7 +16,7 @@ export default function NavigationBar() {
   };
 
   return (
-    <ContentBox style={{ minHeight: '200vh', paddingLeft: '20px' }}>
+    <> 
       <StyledToggleButton
         onClick={() => setShowSidebar(!showSidebar)}
         sidebarVisible={showSidebar}
@@ -71,6 +70,6 @@ export default function NavigationBar() {
           </Nav>
         </StyledSidebar>
       ) : null}
-    </ContentBox>
+    </>
   );
 }

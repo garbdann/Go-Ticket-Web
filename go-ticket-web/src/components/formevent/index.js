@@ -12,7 +12,8 @@ import SubTitle from '../ui/subtitle';
 
 import SubmitButton from '../ui/submitbutton';
 import TextInput from '../ui/textinput';
-import DatePickerInput from '../ui/datepicker';
+import DateInput from '../ui/dateinput';
+import TimeInput from '../ui/timeinput';
 import TextArea from '../ui/textarea';
 import ImageInput from '../ui/imageinput';
 import SelectInput from '../ui/selectinput'; 
@@ -27,6 +28,7 @@ export default function FormEvent() {
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
   const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
   const [limit, setLimit] = useState('');
 
   const navigate = useNavigate();
@@ -43,6 +45,7 @@ export default function FormEvent() {
       description.trim() === '' ||
       location.trim() === '' ||
       date.trim() === '' ||
+      time.trim() === '' ||
       limit.trim() === '' ||
       !imageUrl
     ) {
@@ -55,11 +58,10 @@ export default function FormEvent() {
       return false;
     }
 
-    const eventDate = new Date(date);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    if (eventDate < today) {
-      showDialog('A data do evento não pode ser no passado.');
+    const eventDate = new Date(`${date}T${time}`);
+    const now = new Date();
+    if (eventDate < now) {
+      showDialog('A data e hora do evento não podem estar no passado.');
       return false;
     }
 
@@ -103,7 +105,7 @@ export default function FormEvent() {
       name: name.trim(),
       subject: subject.trim(),
       category: category.trim(),
-      date: String(date),
+      date: `${date}T${time}`,
       description: description.trim(),
       location: location.trim(),
       limit: limit.trim(),
@@ -132,9 +134,26 @@ export default function FormEvent() {
           <Label>Nome do Evento</Label>
           <TextInput value={name} onChange={(e) => setName(e.target.value)} className="form-control" />
 
-          <Label className="mt-3">Data do Evento</Label>
-          <DatePickerInput value={date} onChange={(e) => setDate(e.target.value)} className="form-control" />    
+          <ContentBox className="row">
+            <ContentBox className="col-6">
+              <Label className="mt-3">Data do Evento</Label>
+              <DateInput
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                className="form-control"
+              />
+            </ContentBox>
+            <ContentBox className="col-6">
+              <Label className="mt-3">Horário do Evento</Label>
+              <TimeInput
+                value={time}
+                onChange={(e) => setTime(e.target.value)}
+                className="form-control"
+              />
+            </ContentBox>
+          </ContentBox>
         </ContentBox>
+
         <ContentBox className="col-md-6 col-12">
           <Label>Localização</Label>
           <TextInput value={location} onChange={(e) => setLocation(e.target.value)} className="form-control" />
