@@ -1,9 +1,10 @@
 import Carousel from 'react-bootstrap/Carousel';
+import SubmitButton from '../ui/submitbutton';
 import ImageBox from '../ui/imagebox';
 
 import { getUpcomingEvents } from '../../utils/datatest';
 
-export default function CustomCarousel() {
+export default function CustomCarousel({ onOpenDetails, formatDateForDisplay }) {
   const upcomingEvents = getUpcomingEvents();
 
   return (
@@ -20,7 +21,13 @@ export default function CustomCarousel() {
           <Carousel.Caption>
             <h3>{event.name}</h3>
             <p>{event.description}</p>
-            <p>Data: {new Date(event.date).toLocaleDateString('pt-BR')} às {event.time}</p>
+            <p>Data: {formatDateForDisplay(event.date)} às {event.time}</p>
+            <SubmitButton 
+                onClick={() => onOpenDetails(event)} 
+                style={{ marginTop: '10px' }}
+            >
+                Ver Detalhes
+            </SubmitButton>
           </Carousel.Caption>
         </Carousel.Item>
       ))}

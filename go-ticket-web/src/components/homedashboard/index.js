@@ -17,6 +17,27 @@ import {
     CardArea
 } from './style';
 
+const formatDateForComparison = (dateString) => {
+    if (!dateString) return '';
+    const parts = dateString.split('/');
+    if (parts.length === 3) {
+        const [day, month, year] = parts;
+        return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+    }
+    return dateString;
+};
+
+const formatDateForDisplay = (dateString) => {
+    if (!dateString) return '';
+    const parts = dateString.split('-');
+    if (parts.length === 3) {
+        const [year, month, day] = parts;
+        return `${day.padStart(2, '0')}/${month.padStart(2, '0')}/${year}`;
+    }
+    return dateString;
+};
+
+
 export default function HomeDashboard() {
     const allEvents = getEvents();
     const [selectedEvent, setSelectedEvent] = useState(null);
@@ -34,11 +55,14 @@ export default function HomeDashboard() {
         if (filterCategory) {
             currentEvents = filterEventsByCategory(filterCategory);
         }
+
         if (filterSubject) {
             currentEvents = currentEvents.filter(event => event.subject === filterSubject);
-        } 
+        }
+
         if (filterDate) {
-            currentEvents = currentEvents.filter(event => event.date === filterDate);
+            const formattedFilterDate = formatDateForComparison(filterDate);
+            currentEvents = currentEvents.filter(event => event.date === formattedFilterDate);
         }
 
         setDisplayedEvents(currentEvents);
@@ -60,7 +84,7 @@ export default function HomeDashboard() {
 
             <GridContentBox>
                 <CarouselContentBox>
-                    <CustomCarousel />
+                    <CustomCarousel onOpenDetails={handleOpenDetails} formatDateForDisplay={formatDateForDisplay} />
                 </CarouselContentBox>
 
                 <FilterArea>
@@ -117,7 +141,7 @@ export default function HomeDashboard() {
                 </FilterArea>
 
                 <CardArea>
-                    <ContentBox className="row justify-content-center"> 
+                    <ContentBox className="row"> 
                         {displayedEvents.length > 0 ? (
                             displayedEvents.map(event => (
                                 <ContentBox 
@@ -142,6 +166,7 @@ export default function HomeDashboard() {
                 <EventDetailsDialogBox
                     eventDetails={selectedEvent}
                     onClose={handleCloseDetails}
+                    formatDateForDisplay={formatDateForDisplay}
                 />
             )}
         </>
