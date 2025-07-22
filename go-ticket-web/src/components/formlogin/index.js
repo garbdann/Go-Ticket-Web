@@ -82,7 +82,7 @@ export default function FormLogin() {
             
             <ContentBox style={{textAlign: 'center', width: '100%'}}>
                 <SubmitButton onClick={() => Authenticate()}>Entrar</SubmitButton>
-                <Link onClick={() => navigate('/signUp')}> Sign Up </Link>
+                <Link onClick={() => navigate('/signUp')}> Cadastrar-se </Link>
             </ContentBox>
             
             {dialogVisible && (
