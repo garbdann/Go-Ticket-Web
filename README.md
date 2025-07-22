@@ -17,9 +17,6 @@ ADIÇÕES FUTURAS (Com banco de dados):
 - Meus eventos
 - Meus convites
 
-COISAS A FAZER
-- Adicionar cards e, com map, conseguir listar todos os eventos
-
 EXPLICAÇÃO DA LÓGICA DE BOXES
 Container -> São as divs padrão de tela, equivalem ao tamanho inteiro da tela
 ContentBox -> São divs de conteúdo genérica, no qual os componentes podem estilizar com estilos simples (Inline) ou mais extensos (Styled-component)

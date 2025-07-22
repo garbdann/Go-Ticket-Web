@@ -1,4 +1,3 @@
-// style.js
 import styled, { keyframes } from 'styled-components';
 import { Navbar } from 'react-bootstrap';
 
@@ -20,7 +19,7 @@ export const StyledSidebar = styled(Navbar)`
   top: 0;
   left: 0;
   z-index: 1040;
-  padding-top: 60px; /* Isso é padding INTERNO da sidebar, não afeta o espaço externo */
+  padding-top: 60px;
   border-right: 1px solid #444;
   background-color: #000;
   color: white;
@@ -47,7 +46,7 @@ export const StyledSidebar = styled(Navbar)`
 `;
 
 export const StyledToggleButton = styled.button`
-  position: fixed; /* MUDANÇA AQUI: de 'sticky' para 'fixed' */
+  position: fixed;
   top: 50%;
   transform: translateY(-50%);
   left: ${(props) => (props.sidebarVisible ? '260px' : '10px')};

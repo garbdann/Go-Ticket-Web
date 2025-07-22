@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledSubmitButton = styled.button` /* <-- Mude de styled.input para styled.button */
+export const StyledSubmitButton = styled.button`
     box-sizing: border-box;
     width: 180px;
     height: 35px;
@@ -13,15 +13,14 @@ export const StyledSubmitButton = styled.button` /* <-- Mude de styled.input par
     border: 0px;
     cursor: pointer;
 
-    /* Adicione alguns estilos de feedback para melhor UX */
     &:hover {
       opacity: 0.9;
-      transform: translateY(-1px); /* Pequeno efeito de elevação */
+      transform: translateY(-1px);
     }
 
     &:active {
       opacity: 0.8;
-      transform: translateY(0); /* Volta ao normal no clique */
+      transform: translateY(0);
     }
 
     &:disabled {

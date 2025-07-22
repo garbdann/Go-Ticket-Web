@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { addEvent } from '../../utils/datatest';
 import { useDialog } from '../../hooks/useDialog';
-import { useUser } from '../../context/UserContext'; 
+import { useUser } from '../../context/UserContext';
 
 import ContentBox from '../ui/contentbox';
 import ImageBox from '../ui/imagebox';
@@ -16,7 +16,7 @@ import DateInput from '../ui/dateinput';
 import TimeInput from '../ui/timeinput';
 import TextArea from '../ui/textarea';
 import ImageInput from '../ui/imageinput';
-import SelectInput from '../ui/selectinput'; 
+import SelectInput from '../ui/selectinput';
 import DialogBox from '../ui/dialogbox';
 
 export default function FormEvent() {
@@ -33,10 +33,10 @@ export default function FormEvent() {
 
   const navigate = useNavigate();
   const { dialogVisible, dialogMessage, showDialog, closeDialog } = useDialog();
-  const { user } = useUser(); 
+  const { user } = useUser();
 
   function verifyFields(event) {
-    const { name, subject, category, description, location, date, limit, imageUrl } = event;
+    const { name, subject, category, description, location, date, time, limit, imageUrl } = event;
 
     if (
       name.trim() === '' ||
@@ -105,7 +105,8 @@ export default function FormEvent() {
       name: name.trim(),
       subject: subject.trim(),
       category: category.trim(),
-      date: `${date}T${time}`,
+      date: date.trim(),
+      time: time.trim(),
       description: description.trim(),
       location: location.trim(),
       limit: limit.trim(),
@@ -114,9 +115,20 @@ export default function FormEvent() {
     };
 
     if (!verifyFields(newEvent)) return;
-
+ 
     addEvent(newEvent);
     showDialog(`Evento "${name}" criado com sucesso!`);
+
+    setName('');
+    setSubject('');
+    setCategory('');
+    setImageFile(null);
+    setImageDataUrl(null);
+    setDescription('');
+    setLocation('');
+    setDate('');
+    setTime('');
+    setLimit('');
 
     setTimeout(() => {
       closeDialog();
@@ -125,7 +137,7 @@ export default function FormEvent() {
   }
 
   return (
-    <ContentBox className="container mt-4 p-4"> 
+    <ContentBox className="container mt-4 p-4">
       <Title>Cadastrar um Novo Evento</Title>
       <SubTitle className="mb-3">1. Informações Básicas</SubTitle>
 
@@ -163,16 +175,15 @@ export default function FormEvent() {
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
             options={[
-              { value: '', label: 'Selecione um Assunto' },
-              { value: 'musica', label: 'Música' },
-              { value: 'tecnologia', label: 'Tecnologia' },
-              { value: 'comida', label: 'Comida' },
-              { value: 'cinema', label: 'Cinema' },
-              { value: 'arte', label: 'Arte' },
-              { value: 'corrida', label: 'Corrida' },
-              { value: 'palestra', label: 'Palestra' },
-              { value: 'workshop', label: 'Workshop' },
-              { value: 'evento', label: 'Evento Geral' },
+              { value: 'Música', label: 'Música' },
+              { value: 'Tecnologia', label: 'Tecnologia' },
+              { value: 'Comida', label: 'Comida' },
+              { value: 'Cinema', label: 'Cinema' },
+              { value: 'Arte', label: 'Arte' },
+              { value: 'Corrida', label: 'Corrida' },
+              { value: 'Palestra', label: 'Palestra' },
+              { value: 'Workshop', label: 'Workshop' },
+              { value: 'Evento', label: 'Evento Geral' },
             ]}
             className="form-select"
           />
@@ -181,7 +192,7 @@ export default function FormEvent() {
 
       <SubTitle className="mb-3">2. Imagem do Evento</SubTitle>
       <Label>Envie Imagens de Banners (800px X 600px)</Label>
-      <ContentBox className="d-flex justify-content-center mb-3"> 
+      <ContentBox className="d-flex justify-content-center mb-3">
         {imageDataUrl ? (
           <ImageBox src={imageDataUrl} alt="Prévia da imagem" className="img-fluid" style={{ maxWidth: '800px', height: 'auto', borderRadius: '10px' }} />
         ) : (
@@ -195,15 +206,15 @@ export default function FormEvent() {
               justifyContent: 'center',
               color: '#999',
               borderRadius: '10px',
-              maxWidth: '100%' 
+              maxWidth: '100%'
             }}
           >
             Imagem do Evento
           </ContentBox>
         )}
       </ContentBox>
-      <ContentBox className="d-flex justify-content-center mb-4"> 
-        <ImageInput id="imagem" name="imagem" onChange={handleImageChange} className="form-control" style={{ width: 'auto' }}/>
+      <ContentBox className="d-flex justify-content-center mb-4">
+        <ImageInput id="imagem" name="imagem" onChange={handleImageChange} className="form-control" style={{ width: 'auto' }} />
       </ContentBox>
 
       <SubTitle className="mb-3">3. Descrição do Evento</SubTitle>
@@ -215,17 +226,16 @@ export default function FormEvent() {
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             options={[
-              { value: '', label: 'Selecione uma Categoria' },
-              { value: 'festival', label: 'Festival' },
-              { value: 'conferencia', label: 'Conferência' },
-              { value: 'exposicao', label: 'Exposição' },
-              { value: 'entretenimento', label: 'Entretenimento' },
-              { value: 'beneficente', label: 'Beneficente' },
-              { value: 'esporte', label: 'Esporte' },
-              { value: 'educacao', label: 'Educação' },
-              { value: 'palestra', label: 'Palestra' },
-              { value: 'workshop', label: 'Workshop' },
-              { value: 'evento', label: 'Evento Geral' },
+              { value: 'Festival', label: 'Festival' },
+              { value: 'Conferência', label: 'Conferência' },
+              { value: 'Exposição', label: 'Exposição' },
+              { value: 'Entretenimento', label: 'Entretenimento' },
+              { value: 'Benefeciente', label: 'Beneficente' },
+              { value: 'Esporte', label: 'Esporte' },
+              { value: 'Educação', label: 'Educação' },
+              { value: 'Palestra', label: 'Palestra' },
+              { value: 'Workshop', label: 'Workshop' },
+              { value: 'Evento', label: 'Evento Geral' },
             ]}
             className="form-select"
           />
